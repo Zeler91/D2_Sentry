@@ -13,7 +13,7 @@ sentry_sdk.init(
 
 @route("/")
 def index():  
-    return "Добавьте к адресу /succes - для успешного запроса\n Добавьте к адресу /fail - для ошибочного запроса"
+    return "Добавьте к адресу /success - для успешного запроса\n Добавьте к адресу /fail - для ошибочного запроса"
 
 @route('/success')  
 def success():  
