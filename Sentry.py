@@ -17,8 +17,7 @@ def index():
 
 @app.route('/success')  
 def success():  
-    return 
-    # return "Запрос прошел успешно!!!"
+    return "Запрос прошел успешно!!!"
 
 @app.route('/fail')  
 def fail():  
