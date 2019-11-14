@@ -1,6 +1,6 @@
 import sentry_sdk
 import os
-from bottle import Bottle, request, route, run
+from bottle import Bottle, request
 from sentry_sdk.integrations.bottle import BottleIntegration
 
 # Интеграция Sentry
@@ -9,29 +9,29 @@ sentry_sdk.init(
     integrations=[BottleIntegration()]
 )
 
-# app = Bottle()
+app = Bottle()
 
-@route("/")
+@app.route("/")
 def index():  
     return "Добавьте к адресу /success - для успешного запроса\n Добавьте к адресу /fail - для ошибочного запроса"
 
-@route('/success')  
+@app.route('/success')  
 def success():  
     return 
     # return "Запрос прошел успешно!!!"
 
-@route('/fail')  
+@app.route('/fail')  
 def fail():  
     raise RuntimeError("There is an error!")  
     return  
   
   
 if os.environ.get("APP_LOCATION") == "heroku":
-    run(
+    app.run(
         host="0.0.0.0",
         port=int(os.environ.get("PORT", 5000)),
         server="gunicorn",
         workers=3,
     )
 else:
-    run(host="localhost", port=8080, debug=True)
+    app.run(host="localhost", port=8080, debug=True)
